@@ -51,7 +51,7 @@ export function AnimationsDemo() {
             toast('Slides in from below', {
               position: 'bottom-center',
               animation: {
-                enter: SlideInDown.springify().damping(16),
+                enter: SlideInDown.springify(),
                 exit: SlideOutDown.duration(250),
               },
             })
@@ -63,7 +63,7 @@ export function AnimationsDemo() {
           onPress={() =>
             toast('In from the left, out to the right', {
               animation: {
-                enter: SlideInLeft.springify().damping(18),
+                enter: SlideInLeft.springify(),
                 exit: SlideOutRight.duration(250),
               },
             })
@@ -74,7 +74,7 @@ export function AnimationsDemo() {
           label="Zoom"
           onPress={() =>
             toast.success('Zoomed in with a spring', {
-              animation: { enter: ZoomIn.springify().damping(12), exit: ZoomOut.duration(200) },
+              animation: { enter: ZoomIn.springify(), exit: ZoomOut.duration(200) },
             })
           }
         />

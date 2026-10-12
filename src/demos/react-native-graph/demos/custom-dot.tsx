@@ -40,7 +40,7 @@ function FlatDot({ isActive, color, circleX, circleY }: SelectionDotProps) {
   const radius = useSharedValue(0);
   useAnimatedReaction(
     () => isActive.get(),
-    (active) => radius.set(withSpring(active ? 6 : 0, { mass: 1, stiffness: 1000, damping: 50 })),
+    (active) => radius.set(withSpring(active ? 6 : 0)),
   );
   return <Circle cx={circleX} cy={circleY} r={radius} color={color} />;
 }

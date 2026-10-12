@@ -50,7 +50,7 @@ export function UndoDeleteDemo() {
             key={memory.id}
             entering={FadeIn.duration(250)}
             exiting={FadeOut.duration(200)}
-            layout={LinearTransition.springify().damping(18)}>
+            layout={LinearTransition.springify()}>
             <Card padding="md" style={styles.row}>
               <IconTile emoji={memory.emoji} color={memory.color} size={52} />
               <View style={styles.text}>
