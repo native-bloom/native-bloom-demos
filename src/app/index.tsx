@@ -1,98 +1,174 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
+import { useMemo, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { categories, libraries, totalDemoCount } from '@/demos/registry';
+import {
+  Badge,
+  Card,
+  Chip,
+  HeaderButton,
+  Icon,
+  IconTile,
+  Screen,
+  SearchField,
+  Section,
+  Text,
+  spacing,
+  useColors,
+} from '@/design-system';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+function Wordmark() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <View style={styles.wordmark}>
+      <Text variant="title" style={{ letterSpacing: -1 }}>
+        native bloom
+      </Text>
+      <Badge label="demos" tone="accent" />
+    </View>
   );
 }
 
 export default function HomeScreen() {
+  const router = useRouter();
+  const colors = useColors();
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState<string | null>(null);
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return libraries
+      .filter((l) => !category || l.category === category)
+      .map((l) => {
+        if (!q) return { library: l, demos: l.demos };
+        const libMatch = l.name.toLowerCase().includes(q) || l.packageName.includes(q);
+        const demos = l.demos.filter(
+          (d) => d.title.toLowerCase().includes(q) || d.description.toLowerCase().includes(q),
+        );
+        return {
+          library: l,
+          demos: libMatch ? l.demos : demos,
+          matchedDemos: libMatch ? [] : demos,
+        };
+      })
+      .filter((r) => r.demos.length > 0);
+  }, [query, category]);
+
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
+    <Screen
+      header={{
+        back: false,
+        center: <Wordmark />,
+        right: (
+          <HeaderButton icon="settings" label="Settings" onPress={() => router.push('/settings')} />
+        ),
+      }}>
+      <Card style={styles.hero}>
+        <View style={{ gap: spacing.xs }}>
+          <Text variant="caption" color="textSecondary">
+            DISCOVER
+          </Text>
+          <Text variant="title">Native demos, curated the Bloom way</Text>
+          <Text variant="label" color="textSecondary">
+            {totalDemoCount()} demos across {libraries.length}{' '}
+            {libraries.length === 1 ? 'library' : 'libraries'}, from basic to advanced.
+          </Text>
+        </View>
+        <View style={styles.chips}>
+          <Chip
+            label="All"
+            selected={category === null}
+            onPress={() => setCategory(null)}
+            size="sm"
           />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+          {categories.map((c) => (
+            <Chip
+              key={c}
+              label={c}
+              selected={category === c}
+              onPress={() => setCategory(category === c ? null : c)}
+              size="sm"
+            />
+          ))}
+        </View>
+      </Card>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      <SearchField
+        placeholder="Search demos and libraries"
+        value={query}
+        onChangeText={setQuery}
+        onClear={() => setQuery('')}
+      />
+
+      <Section title="Libraries" description="Tap a library to browse its demos.">
+        {results.length === 0 ? (
+          <Card variant="muted">
+            <Text variant="label" color="textSecondary" align="center">
+              No matches for “{query}”.
+            </Text>
+          </Card>
+        ) : null}
+        {results.map(({ library, matchedDemos }) => (
+          <Card
+            key={library.slug}
+            onPress={() =>
+              router.push({ pathname: '/library/[slug]', params: { slug: library.slug } })
+            }
+            style={{ gap: spacing.md }}>
+            <View style={styles.libraryRow}>
+              <IconTile emoji={library.emoji} color={library.color} size={52} />
+              <View style={{ flex: 1, gap: 2 }}>
+                <Text variant="heading">{library.name}</Text>
+                <Text variant="label" color="textSecondary" numberOfLines={2}>
+                  {library.tagline}
+                </Text>
+              </View>
+              <Icon name="forward" size={14} color="textTertiary" />
+            </View>
+            <View style={styles.meta}>
+              <Badge label={library.category} tone="accent" />
+              <Badge label={`${library.demos.length} demos`} />
+              <Text variant="caption" color="textTertiary" style={{ marginLeft: 'auto' }}>
+                {library.packageName}
+              </Text>
+            </View>
+            {matchedDemos && matchedDemos.length ? (
+              <View style={[styles.matches, { borderTopColor: colors.border }]}>
+                {matchedDemos.slice(0, 4).map((d) => (
+                  <Chip
+                    key={d.slug}
+                    emoji={d.emoji}
+                    label={d.title}
+                    size="sm"
+                    variant="outline"
+                    onPress={() =>
+                      router.push({
+                        pathname: '/demo/[library]/[demo]',
+                        params: { library: library.slug, demo: d.slug },
+                      })
+                    }
+                  />
+                ))}
+              </View>
+            ) : null}
+          </Card>
+        ))}
+      </Section>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
+  wordmark: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  hero: { gap: spacing.lg },
+  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  libraryRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
+  meta: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  matches: {
     flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+    paddingTop: spacing.md,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
 });

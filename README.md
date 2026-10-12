@@ -1,56 +1,56 @@
-# Welcome to your Expo app 👋
+# Native Bloom Demos
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+One Expo app that hosts hand-made demos of React Native UI libraries for
+[Native Bloom](https://nativebloom.dev). Each demo shows a single idea, is recorded
+as a video for the website, and lives in one self-contained file that coding agents
+can copy when a user installs the block.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run
 
 ```bash
-npm run reset-project
+npm install
+npx expo start      # with the dev build installed
+npm run ios         # build and install the iOS dev build
+npm run android
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Libraries
 
-### Other setup steps
+### Sonner Native · 14 demos
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+| Level | Demos |
+| ----- | ----- |
+| Basic | Basic toast · Toast variants · Toast content variants |
+| Intermediate | Toast with promise · Toast behavior variants · Toast stacking · Toast wiggle |
+| Advanced | Toast custom styling · Custom JSX toasts · Toast custom animations · Glass toasts · Toasts inside a sheet · Toast after navigation · Undo delete |
 
-## Learn more
+### DateTimePicker · 10 demos
 
-To learn more about developing your project with Expo, look at the following resources:
+| Level | Demos |
+| ----- | ----- |
+| Basic | Date picker · Picker modes · Display styles |
+| Intermediate | Date limits · Minute intervals · Time zones |
+| Advanced | Custom colors · Event form · Birthday picker · Picker in a sheet |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### React Native Graph · 11 demos
 
-## Join the community
+| Level | Demos |
+| ----- | ----- |
+| Basic | Line graph · Animated transitions · Gradient fill |
+| Intermediate | Scrub to read values · Axis labels · Fixed range · Live heart rate |
+| Advanced | Line styles · Custom selection dot · Watchlist sparklines · Price chart |
 
-Join our community of developers creating universal apps.
+## Adding a library or demo
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [DESIGN.md](DESIGN.md): how demos look.
+- [docs/ADDING_DEMOS.md](docs/ADDING_DEMOS.md): how demos are structured.
+- `.claude/skills/add-library-demos`: the workflow for agents, from GitHub link to verified demos.
+
+```bash
+npm run new:demo -- <library> <slug> "Title" --kind isolated|showcase|scenario|flow
+npm run check:demos
+```
+
+## Stack
+
+Expo SDK 57 · Expo Router · Expo UI · Reanimated 4 · react-native-keyboard-controller · TypeScript

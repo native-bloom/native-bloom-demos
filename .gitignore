@@ -41,3 +41,10 @@ example
 # generated native folders
 /ios
 /android
+
+# Continuous Native Generation
+/ios
+/android
+
+# Argent screenshots and recordings
+.argent/
