@@ -79,30 +79,6 @@ Setup for each client is on [nativebloom.dev/mcp](https://nativebloom.dev/mcp).
 - **Teams** who want one shared library of references and the same context for every agent.
 - **Recruiters** who want to find the people building in React Native through what they ship.
 
-## Plans
-
-| | Free | Pro | Team |
-| --- | :---: | :---: | :---: |
-| Browse the catalog with video previews | ✓ | ✓ | ✓ |
-| Full context and prompts | 15 spotlight blocks | Every open-source block | Every open-source block |
-| MCP searches | 25 a day | Unlimited | Unlimited |
-| Catalog assistant | | ✓ | ✓ |
-| Saves | 12 | Unlimited, with folders | Unlimited, with folders |
-| Shared team workspace | | | ✓ |
-
-Billed monthly, quarterly, or yearly. Cancel anytime.
-[See pricing →](https://nativebloom.dev/#pricing)
-
-## Credit where it's due
-
-Native Bloom doesn't own or resell anyone's code. Every block credits its authors,
-collections, and packages, and links back to the original repo, docs, or store. Blocks
-from paid kits show the video only; buy the kit from its maker to use it.
-
-Maintainers: if something of yours should be updated or removed, email
-[hello@nativebloom.dev](mailto:hello@nativebloom.dev). More at
-[nativebloom.dev/for-authors](https://nativebloom.dev/for-authors).
-
 ---
 
 <p align="center">
