@@ -1,56 +1,112 @@
-# Native Bloom Demos
+<p align="center">
+  <a href="https://nativebloom.dev">
+    <img src="assets/images/native-bloom-logo.png" alt="Native Bloom" width="120" height="120" />
+  </a>
+</p>
 
-One Expo app that hosts hand-made demos of React Native UI libraries for
-[Native Bloom](https://nativebloom.dev). Each demo shows a single idea, is recorded
-as a video for the website, and lives in one self-contained file that coding agents
-can copy when a user installs the block.
+<h1 align="center">Native Bloom</h1>
 
-## Run
+<p align="center">
+  <strong>React Native UI for agents and humans.</strong>
+</p>
 
-```bash
-npm install
-npx expo start      # with the dev build installed
-npm run ios         # build and install the iOS dev build
-npm run android
+<p align="center">
+  A handpicked, living catalog of React Native UI from real builders.<br />
+  Preview every block on video, find it in seconds, and ship it with your agent.
+</p>
+
+<p align="center">
+  <a href="https://nativebloom.dev/blocks"><strong>Explore blocks →</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://nativebloom.dev/mcp">MCP</a>
+  &nbsp;·&nbsp;
+  <a href="https://nativebloom.dev/#pricing">Pricing</a>
+  &nbsp;·&nbsp;
+  <a href="https://x.com/nativebloomdev">X</a>
+</p>
+
+---
+
+## Great UI is easy to see and hard to find again
+
+You saw the perfect animation on X. You bookmarked it. Three months later it's gone.
+
+You found a promising library, but to see what it looks like you have to clone the repo,
+install everything, and run the example app. Many libraries have no preview at all.
+
+And if you step away from the community for a few months, you fall behind.
+
+**Native Bloom fixes that.** One catalog where every block is on video, searchable by
+what it is, with the context your agent needs to put it in your app.
+
+## What's inside
+
+Blocks are components, animations, and patterns from npm libraries, open source
+collections, paid kits, articles, videos, and social posts. Each one is reviewed by
+hand before it goes live, and new ones are added almost every day.
+
+| | |
+| --- | --- |
+| **See it on video** | Every block has a short video preview. Judge the motion and layout in seconds, without a clone-and-run. |
+| **Browse by vibe** | Filter by component, animation, collection, package, or author. You can explore before you know what the thing is called. |
+| **Ask the catalog** | Describe the UI you need. The Pro assistant searches the catalog and filters the feed for you. |
+| **Learn how it works** | Ask how a block works. The assistant reads the real source, docs, and GitHub before it explains. |
+| **Ask from your editor** | Connect Cursor, Claude Code, Codex, or any MCP client. Your agent finds a block and pulls the source. |
+| **Ship with your agent** | Copy a prompt written for your coding agent, or open it straight in Codex, Claude Code, or Cursor. |
+
+## Use it from your editor
+
+Point your MCP client at the catalog:
+
+```json
+{
+  "mcpServers": {
+    "native-bloom": {
+      "url": "https://mcp.nativebloom.dev/mcp"
+    }
+  }
+}
 ```
 
-## Libraries
+Then ask your agent for "a bottom sheet with a blurred backdrop" and let it find the block.
+Setup for each client is on [nativebloom.dev/mcp](https://nativebloom.dev/mcp).
 
-### Sonner Native · 14 demos
+## Who it's for
 
-| Level | Demos |
-| ----- | ----- |
-| Basic | Basic toast · Toast variants · Toast content variants |
-| Intermediate | Toast with promise · Toast behavior variants · Toast stacking · Toast wiggle |
-| Advanced | Toast custom styling · Custom JSX toasts · Toast custom animations · Glass toasts · Toasts inside a sheet · Toast after navigation · Undo delete |
+- **React Native developers** who want to find production UI fast and stop hunting through GitHub.
+- **Developers new to React Native** who want to see what exists before they know the jargon.
+- **Designers and vibecoders** who think visually and don't want to clone a repo to see a component.
+- **Teams** who want one shared library of references and the same context for every agent.
+- **Recruiters** who want to find the people building in React Native through what they ship.
 
-### DateTimePicker · 10 demos
+## Plans
 
-| Level | Demos |
-| ----- | ----- |
-| Basic | Date picker · Picker modes · Display styles |
-| Intermediate | Date limits · Minute intervals · Time zones |
-| Advanced | Custom colors · Event form · Birthday picker · Picker in a sheet |
+| | Free | Pro | Team |
+| --- | :---: | :---: | :---: |
+| Browse the catalog with video previews | ✓ | ✓ | ✓ |
+| Full context and prompts | 15 spotlight blocks | Every open-source block | Every open-source block |
+| MCP searches | 25 a day | Unlimited | Unlimited |
+| Catalog assistant | | ✓ | ✓ |
+| Saves | 12 | Unlimited, with folders | Unlimited, with folders |
+| Shared team workspace | | | ✓ |
 
-### React Native Graph · 11 demos
+Billed monthly, quarterly, or yearly. Cancel anytime.
+[See pricing →](https://nativebloom.dev/#pricing)
 
-| Level | Demos |
-| ----- | ----- |
-| Basic | Line graph · Animated transitions · Gradient fill |
-| Intermediate | Scrub to read values · Axis labels · Fixed range · Live heart rate |
-| Advanced | Line styles · Custom selection dot · Watchlist sparklines · Price chart |
+## Credit where it's due
 
-## Adding a library or demo
+Native Bloom doesn't own or resell anyone's code. Every block credits its authors,
+collections, and packages, and links back to the original repo, docs, or store. Blocks
+from paid kits show the video only; buy the kit from its maker to use it.
 
-- [DESIGN.md](DESIGN.md): how demos look.
-- [docs/ADDING_DEMOS.md](docs/ADDING_DEMOS.md): how demos are structured.
-- `.claude/skills/add-library-demos`: the workflow for agents, from GitHub link to verified demos.
+Maintainers: if something of yours should be updated or removed, email
+[hello@nativebloom.dev](mailto:hello@nativebloom.dev). More at
+[nativebloom.dev/for-authors](https://nativebloom.dev/for-authors).
 
-```bash
-npm run new:demo -- <library> <slug> "Title" --kind isolated|showcase|scenario|flow
-npm run check:demos
-```
+---
 
-## Stack
-
-Expo SDK 57 · Expo Router · Expo UI · Reanimated 4 · react-native-keyboard-controller · TypeScript
+<p align="center">
+  <a href="https://nativebloom.dev"><strong>nativebloom.dev</strong></a><br />
+  <sub>React Native UI blocks. Find it fast, ship it faster.</sub><br />
+  <sub>Made by <a href="https://x.com/v_serbulenko">Volodymyr Serbulenko</a></sub>
+</p>

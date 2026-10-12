@@ -107,7 +107,6 @@ header comment and add a line to the "Gotchas" section of docs/ADDING_DEMOS.md.
 
 ## 7. Finish
 
-- Update the library table in README.md.
 - Stop Metro. Make sure Argent output stayed in this repo's `.argent/` (gitignored).
 - Report to the user: the demo list, what you fixed during verification, any library caveats,
   and anything you could not verify.
