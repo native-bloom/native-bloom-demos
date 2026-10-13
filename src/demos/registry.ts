@@ -3,6 +3,8 @@ import { datetimepicker } from './datetimepicker';
 import { reactNativeGraph } from './react-native-graph';
 import { reanimatedColorPicker } from './reanimated-color-picker';
 import { sonnerNative } from './sonner-native';
+import { sortables } from './sortables';
+import { trueSheet } from './true-sheet';
 
 /**
  * Every library that ships demos. Add new libraries here; the home, library and
@@ -13,6 +15,8 @@ export const libraries: readonly LibraryDefinition[] = [
   datetimepicker,
   reactNativeGraph,
   reanimatedColorPicker,
+  trueSheet,
+  sortables,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));

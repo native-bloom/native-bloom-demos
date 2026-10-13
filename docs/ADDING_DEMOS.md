@@ -215,3 +215,22 @@ Checklist per demo:
   `hideInitialColor`. Inside a scroll view, use the gesture-handler `ScrollView` so slider drags
   do not scroll the page. Pass `inputProps={{ autoCapitalize: 'none' }}` to `InputWidget`, or iOS
   capitalizes hex values.
+- **@lodev09/react-native-true-sheet (3.11):** native module, needs a dev build. Don't call
+  `TrueSheet.dismissAll()` from `onDemoExit`: leaving the screen already dismisses its sheets, and
+  the second dismiss logs "sheet is already dismissed". Fast navigation can still log that and
+  "already presented" from the library's own navigation handling; both are silenced in its
+  `index.ts`. `draggable={false}` does not hide the iOS grabber; pass `grabber={false}` too. A
+  non-dismissible sheet at a tall detent covers the screen edge, so the back swipe can't reach the
+  screen underneath; keep the top detent below about 0.8 (or let it be dismissed). Persistent sheets
+  (`initialDetentIndex`) only present when their screen is on top: chaining deep links pushes
+  screens and leaves the earlier sheet blocking the next, so swipe back between demos. A Metro
+  reload while a sheet is presented leaves an orphaned native sheet; relaunch the app. With
+  `scrollable`, `scrollToEnd()` is unreliable; use `scrollToOffset({ offset: 99999 })`.
+- **react-native-sortables (1.10):** pure JS; haptics turn on by themselves because expo-haptics is
+  installed. Items are keyed by `id`, then `key`, then the item itself; pass `keyExtractor` for
+  anything else (e.g. a separator string mixed with objects). Buttons inside an item must be
+  `Sortable.Touchable`, or the tap fights the long-press drag. `Sortable.Handle mode` only takes
+  effect with `customHandle` on the sortable. Live per-item values (rank, scheduled state) come from
+  `useItemContext()` shared values, so they update mid-drag without React renders. Drags need a
+  long press: with Argent, use `gesture-custom` (Down, a Move at the same point after ~700 ms, then
+  the drag), not `gesture-swipe`.

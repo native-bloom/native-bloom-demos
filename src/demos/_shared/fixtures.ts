@@ -18,6 +18,7 @@ export const people: Person[] = [
   { id: 'ryan', name: 'Ryan Lee', handle: '@ryanlee', color: '#EEF6E2' },
 ];
 
+/** Cartoon food scenes (Fluent Emoji artwork, see assets/demos/CREDITS.md), not real photos. */
 export const photos = {
   strawberries: require('@/assets/demos/strawberries.jpg') as ImageSourcePropType,
   coffee: require('@/assets/demos/coffee.jpg') as ImageSourcePropType,

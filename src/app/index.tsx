@@ -128,7 +128,12 @@ export default function HomeScreen() {
             <View style={styles.meta}>
               <Badge label={library.category} tone="accent" />
               <Badge label={`${library.demos.length} demos`} />
-              <Text variant="caption" color="textTertiary" style={{ marginLeft: 'auto' }}>
+              <Text
+                variant="caption"
+                color="textTertiary"
+                numberOfLines={1}
+                ellipsizeMode="middle"
+                style={styles.packageName}>
                 {library.packageName}
               </Text>
             </View>
@@ -164,6 +169,8 @@ const styles = StyleSheet.create({
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   libraryRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
   meta: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  // Long scoped names (@react-native-community/…) shrink instead of overflowing the card.
+  packageName: { flexShrink: 1, marginLeft: 'auto', textAlign: 'right' },
   matches: {
     flexDirection: 'row',
     flexWrap: 'wrap',
