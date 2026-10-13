@@ -206,3 +206,12 @@ Checklist per demo:
   `DateTimePickerAndroid.open()`. Remount with `key` when switching `mode` or `display`. The
   compact pill is left-aligned in its frame: `style={{ alignSelf: 'center' }}`.
   `minuteInterval` and `textColor` only work with `display="spinner"`; `accentColor` does not.
+- **reanimated-color-picker (5.1):** `ColorPicker` reads `value` only as a starting point and when
+  it changes; remount with `key` when switching which children it renders. `setColor()` on the ref
+  animates the thumbs but does not fire `onChange`, so animate anything that follows the color
+  yourself (`withTiming` on the same shared value). `renderThumb`'s `positionStyle` is typed for
+  View, Text and Image at once; cast it to `StyleProp<AnimatedStyle<ViewStyle>>` on an
+  `Animated.View`. `Preview` shows the initial and current color side by side unless
+  `hideInitialColor`. Inside a scroll view, use the gesture-handler `ScrollView` so slider drags
+  do not scroll the page. Pass `inputProps={{ autoCapitalize: 'none' }}` to `InputWidget`, or iOS
+  capitalizes hex values.
