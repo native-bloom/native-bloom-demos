@@ -248,3 +248,11 @@ Checklist per demo:
   `androidRenderingMode="software"`. For tap positions inside a masked card use a Gesture Handler
   tap (`event.x/y` are relative to the view); `locationX` from `onPress` is relative to whichever
   child was touched.
+- **react-native-maps (1.27, the version Expo SDK 57 pins):** needs the `react-native-maps` config
+  plugin in app.json and a rebuild (`npx expo prebuild -p ios`, then `npm run ios`). iOS uses Apple
+  Maps with no key; Android needs a Google Maps key (`androidGoogleMapsApiKey` in the plugin), so
+  these demos are `platforms: ['ios']` until a key is added. Pass `userInterfaceStyle` to follow the
+  app theme. Tiles stream in, so wait a few seconds before screenshots. `addressForCoordinate` can
+  return the string "(null)" for missing parts and fails when rate-limited; filter and handle errors.
+  To restyle a custom marker (e.g. selected state), change its `key` rather than turning on
+  `tracksViewChanges` for every marker.
