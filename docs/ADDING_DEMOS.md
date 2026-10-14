@@ -239,3 +239,12 @@ Checklist per demo:
   (`require`) but the types say `string[]`, so cast; iOS uses them as template images (black on
   transparent, ship @2x/@3x). On iOS 26, `backgroundColor` fills a square behind the pill-shaped
   control: add `style={{ borderRadius: 100, overflow: 'hidden' }}`. `momentary` is iOS only.
+- **@react-native-masked-view/masked-view (0.3, maintained at callstack/masked-view):** Expo
+  Router already depends on it, so the dev build includes the native code. The mask uses only the
+  alpha channel: keep the mask's background transparent and draw shapes in any opaque color.
+  `experimental_backgroundImage` gradients work both as the masked content and as the mask (faded
+  edges) on iOS. Pastel content behind a mask on a white card barely reads; put it on a dark
+  backdrop. Animated masks work on iOS out of the box; Android needs
+  `androidRenderingMode="software"`. For tap positions inside a masked card use a Gesture Handler
+  tap (`event.x/y` are relative to the view); `locationX` from `onPress` is relative to whichever
+  child was touched.
