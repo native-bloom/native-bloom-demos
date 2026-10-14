@@ -2,6 +2,7 @@ import type { LibraryDefinition, ProviderComponent } from './types';
 import { datetimepicker } from './datetimepicker';
 import { reactNativeGraph } from './react-native-graph';
 import { reanimatedColorPicker } from './reanimated-color-picker';
+import { segmentedControl } from './segmented-control';
 import { sonnerNative } from './sonner-native';
 import { sortables } from './sortables';
 import { trueSheet } from './true-sheet';
@@ -17,6 +18,7 @@ export const libraries: readonly LibraryDefinition[] = [
   reanimatedColorPicker,
   trueSheet,
   sortables,
+  segmentedControl,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));

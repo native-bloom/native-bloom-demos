@@ -234,3 +234,8 @@ Checklist per demo:
   `useItemContext()` shared values, so they update mid-drag without React renders. Drags need a
   long press: with Argent, use `gesture-custom` (Down, a Move at the same point after ~700 ms, then
   the drag), not `gesture-swipe`.
+- **@react-native-segmented-control/segmented-control (2.5):** native `UISegmentedControl` on iOS
+  (needs a dev build), a JavaScript look-alike on Android and web. `values` accepts images
+  (`require`) but the types say `string[]`, so cast; iOS uses them as template images (black on
+  transparent, ship @2x/@3x). On iOS 26, `backgroundColor` fills a square behind the pill-shaped
+  control: add `style={{ borderRadius: 100, overflow: 'hidden' }}`. `momentary` is iOS only.

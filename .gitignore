@@ -48,3 +48,6 @@ example
 
 # Argent screenshots and recordings
 .argent/
+
+# Local demos folder at the repo root (src/demos is the app code and stays tracked)
+/demos/
