@@ -261,3 +261,11 @@ Checklist per demo:
   tint the whole wheel with `itemStyle.color`, spring the wheel back in `onValueChange` for
   unavailable items, and lock it with a wrapper `pointerEvents="none"`. `themeVariant` is only on
   `PickerIOS`. Change the `key` when switching `itemStyle` so the wheel re-measures.
+- **@react-native-community/slider (5.2, the version Expo SDK 57 pins):** native module, needs a dev
+  build. On iOS 26 with the New Architecture `thumbImage` never shows (local or remote image); use
+  `thumbSize` + `thumbTintColor`. `StepMarker` components are centered on the track and drawn above
+  the thumb: keep the slider at its default 40 pt height, add no vertical offsets, return `null` for
+  the marked step if the thumb should show, and leave ~24 pt below for `renderStepNumber`. React
+  Native's `filter` style only supports brightness and opacity on iOS, and `ImageStyle` doesn't type it.
+  Give `StepMarker` views `pointerEvents="none"` so they don't sit on top of the slider's touches.
+  `tapToSeek` didn't move the thumb on iOS 26 simulator taps (dragging works).

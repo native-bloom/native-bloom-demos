@@ -6,6 +6,7 @@ import { reactNativeGraph } from './react-native-graph';
 import { reactNativeMaps } from './react-native-maps';
 import { reanimatedColorPicker } from './reanimated-color-picker';
 import { segmentedControl } from './segmented-control';
+import { slider } from './slider';
 import { sonnerNative } from './sonner-native';
 import { sortables } from './sortables';
 import { trueSheet } from './true-sheet';
@@ -25,6 +26,7 @@ export const libraries: readonly LibraryDefinition[] = [
   maskedView,
   reactNativeMaps,
   picker,
+  slider,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));
