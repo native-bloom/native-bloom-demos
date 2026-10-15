@@ -256,3 +256,8 @@ Checklist per demo:
   return the string "(null)" for missing parts and fails when rate-limited; filter and handle errors.
   To restyle a custom marker (e.g. selected state), change its `key` rather than turning on
   `tracksViewChanges` for every marker.
+- **@react-native-picker/picker (2.11):** native module, needs a dev build. On iOS with the New
+  Architecture, `Picker.Item` `enabled` and `color` and `Picker` `enabled` are not wired up natively:
+  tint the whole wheel with `itemStyle.color`, spring the wheel back in `onValueChange` for
+  unavailable items, and lock it with a wrapper `pointerEvents="none"`. `themeVariant` is only on
+  `PickerIOS`. Change the `key` when switching `itemStyle` so the wheel re-measures.

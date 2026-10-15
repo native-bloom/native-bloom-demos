@@ -1,6 +1,7 @@
 import type { LibraryDefinition, ProviderComponent } from './types';
 import { datetimepicker } from './datetimepicker';
 import { maskedView } from './masked-view';
+import { picker } from './picker';
 import { reactNativeGraph } from './react-native-graph';
 import { reactNativeMaps } from './react-native-maps';
 import { reanimatedColorPicker } from './reanimated-color-picker';
@@ -23,6 +24,7 @@ export const libraries: readonly LibraryDefinition[] = [
   segmentedControl,
   maskedView,
   reactNativeMaps,
+  picker,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));
