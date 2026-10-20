@@ -1,0 +1,27 @@
+{
+  "out": "assets/demos/stickers-tile-code-dark.jpg",
+  "size": [
+    900,
+    900
+  ],
+  "surface": "dark",
+  "seed": 51,
+  "place": [
+    {
+      "id": "code",
+      "x": 0.47,
+      "y": 0.44,
+      "scale": 2.7,
+      "rotate": -8
+    },
+    {
+      "id": "lgtm",
+      "x": 0.66,
+      "y": 0.8,
+      "scale": 1.4,
+      "rotate": 6
+    }
+  ],
+  "stickers": [],
+  "rotate": 14
+}

@@ -8,12 +8,12 @@
  * Reanimated's `LinearTransition`.
  */
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
-import { Image } from 'expo-image';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 
-import { photos } from '@/demos/_shared/fixtures';
+import { stickerArt } from '@/demos/_shared/fixtures';
+import { Picture } from '@/demos/_shared/picture';
 import { DemoStage } from '@/demos/_shared/stage';
 import { Text, radius, spacing, useColors } from '@/design-system';
 
@@ -23,10 +23,10 @@ const LAYOUT_ICONS = [
 ] as unknown as string[];
 
 const ITEMS = [
-  { id: '1', title: 'Strawberry picking', meta: 'Saturday · 24 photos', photo: photos.strawberries },
-  { id: '2', title: 'Matcha at Plentea', meta: 'Friday · 6 photos', photo: photos.coffee },
-  { id: '3', title: 'Salad club', meta: 'Thursday · 11 photos', photo: photos.salad },
-  { id: '4', title: 'Market haul', meta: 'Tuesday · 9 photos', photo: photos.vegetables },
+  { id: '1', title: 'Laptop stickers', meta: 'Saturday · 24 photos', art: stickerArt.tileCode },
+  { id: '2', title: 'Surf trip', meta: 'Friday · 6 photos', art: stickerArt.tileSurf },
+  { id: '3', title: 'Skate park', meta: 'Thursday · 11 photos', art: stickerArt.tileSkate },
+  { id: '4', title: 'Rubber duck club', meta: 'Tuesday · 9 photos', art: stickerArt.tileDuck },
 ];
 
 const layout = LinearTransition.duration(280);
@@ -54,7 +54,10 @@ export function ViewSwitcherDemo() {
             layout={layout}
             style={[grid ? styles.tile : styles.row, { backgroundColor: colors.surface }]}>
             <Animated.View layout={layout} style={grid ? styles.tilePhoto : styles.rowPhoto}>
-              <Image source={item.photo} style={styles.fill} contentFit="cover" />
+              <Picture
+                art={item.art}
+                style={[styles.fill, grid ? styles.tileArt : styles.rowArt]}
+              />
             </Animated.View>
             <View style={grid ? styles.tileText : styles.rowText}>
               <Text variant="bodyStrong" numberOfLines={1}>
@@ -95,4 +98,6 @@ const styles = StyleSheet.create({
   tilePhoto: { width: '100%', aspectRatio: 1 },
   tileText: { padding: spacing.md },
   fill: { width: '100%', height: '100%' },
+  rowArt: { borderRadius: radius.md },
+  tileArt: { borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg },
 });

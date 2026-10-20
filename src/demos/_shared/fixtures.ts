@@ -1,6 +1,6 @@
 /**
- * The shared sample world every demo draws from: the people, memories, places
- * and photos of a Bond-like app. Using the same cast across libraries keeps
+ * The shared sample world every demo draws from: the people, memories and places
+ * of a Bond-like app, and the sticker art that stands in for pictures. Using the same cast across libraries keeps
  * the recordings consistent and saves inventing data per demo.
  *
  * Demo code may inline short strings ("Sam Lee loved your story"); use these
@@ -18,13 +18,82 @@ export const people: Person[] = [
   { id: 'ryan', name: 'Ryan Lee', handle: '@ryanlee', color: '#EEF6E2' },
 ];
 
-/** Cartoon food scenes (Fluent Emoji artwork, see assets/demos/CREDITS.md), not real photos. */
-export const photos = {
-  strawberries: require('@/assets/demos/strawberries.jpg') as ImageSourcePropType,
-  coffee: require('@/assets/demos/coffee.jpg') as ImageSourcePropType,
-  salad: require('@/assets/demos/salad.jpg') as ImageSourcePropType,
-  vegetables: require('@/assets/demos/vegetables.jpg') as ImageSourcePropType,
+/**
+ * Sticker art: original dev and skate/surf stickers on the app's canvas, drawn with the
+ * `sticker-art` skill (.claude/skills/sticker-art). Each comes in a light and a dark surface;
+ * pick by `useTheme().scheme`.
+ */
+export const stickerArt = {
+  /** Full stage under the header, empty band in the middle for triggers. */
+  desk: {
+    light: require('@/assets/demos/stickers-desk.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-desk-dark.jpg') as ImageSourcePropType,
+  },
+  /** Full screen, clear at the top for a title. */
+  cover: {
+    light: require('@/assets/demos/stickers-cover.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-cover-dark.jpg') as ImageSourcePropType,
+  },
+  /** Tall rounded card, clear along the bottom for a row of triggers. */
+  glass: {
+    light: require('@/assets/demos/stickers-glass.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-glass-dark.jpg') as ImageSourcePropType,
+  },
+  /** Square-ish showcase card. */
+  spotlight: {
+    light: require('@/assets/demos/stickers-spotlight.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-spotlight-dark.jpg') as ImageSourcePropType,
+  },
+  /** Landscape cards (≈16:10): dev, surf and skate sets. */
+  cardDev: {
+    light: require('@/assets/demos/stickers-card-dev.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-card-dev-dark.jpg') as ImageSourcePropType,
+  },
+  cardSurf: {
+    light: require('@/assets/demos/stickers-card-surf.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-card-surf-dark.jpg') as ImageSourcePropType,
+  },
+  cardSkate: {
+    light: require('@/assets/demos/stickers-card-skate.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-card-skate-dark.jpg') as ImageSourcePropType,
+  },
+  /** Dense fills that show through text and shape masks. */
+  fillDev: {
+    light: require('@/assets/demos/stickers-fill-dev.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-fill-dev-dark.jpg') as ImageSourcePropType,
+  },
+  fillSurf: {
+    light: require('@/assets/demos/stickers-fill-surf.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-fill-surf-dark.jpg') as ImageSourcePropType,
+  },
+  fillSkate: {
+    light: require('@/assets/demos/stickers-fill-skate.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-fill-skate-dark.jpg') as ImageSourcePropType,
+  },
+  fillMix: {
+    light: require('@/assets/demos/stickers-fill-mix.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-fill-mix-dark.jpg') as ImageSourcePropType,
+  },
+  /** Square album tiles, one big sticker each. */
+  tileCode: {
+    light: require('@/assets/demos/stickers-tile-code.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-tile-code-dark.jpg') as ImageSourcePropType,
+  },
+  tileSurf: {
+    light: require('@/assets/demos/stickers-tile-surf.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-tile-surf-dark.jpg') as ImageSourcePropType,
+  },
+  tileSkate: {
+    light: require('@/assets/demos/stickers-tile-skate.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-tile-skate-dark.jpg') as ImageSourcePropType,
+  },
+  tileDuck: {
+    light: require('@/assets/demos/stickers-tile-duck.jpg') as ImageSourcePropType,
+    dark: require('@/assets/demos/stickers-tile-duck-dark.jpg') as ImageSourcePropType,
+  },
 };
+
+export type StickerArt = (typeof stickerArt)[keyof typeof stickerArt];
 
 export type Memory = {
   id: string;
@@ -34,7 +103,6 @@ export type Memory = {
   emoji: string;
   /** Background for the emoji tile. */
   color: string;
-  photo?: ImageSourcePropType;
 };
 
 export const memories: Memory[] = [
@@ -77,7 +145,6 @@ export const memories: Memory[] = [
     ago: '3 days ago',
     emoji: '🍵',
     color: '#EEF6E2',
-    photo: photos.coffee,
   },
 ];
 

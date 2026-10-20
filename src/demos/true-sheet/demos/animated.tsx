@@ -18,11 +18,13 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { people, photos } from '@/demos/_shared/fixtures';
-import { Avatar, Text, spacing } from '@/design-system';
+import { people, stickerArt } from '@/demos/_shared/fixtures';
+import { Avatar, Text, spacing, useColors, useTheme } from '@/design-system';
 
 function Cover() {
   const insets = useSafeAreaInsets();
+  const colors = useColors();
+  const { scheme } = useTheme();
   const { animatedIndex } = useReanimatedTrueSheet();
 
   const photoStyle = useAnimatedStyle(() => {
@@ -40,10 +42,12 @@ function Cover() {
 
   return (
     <View style={styles.cover}>
-      <Animated.Image source={photos.strawberries} style={[styles.photo, photoStyle]} />
+      <Animated.Image source={stickerArt.cover[scheme]} style={[styles.photo, photoStyle]} />
       <Animated.View style={[styles.titleWrap, { top: insets.top + spacing['2xl'] }, titleStyle]}>
-        <Text style={styles.coverTitle}>Strawberry picking</Text>
-        <Text style={styles.coverCaption}>Saturday · Wicks Farm</Text>
+        <Text style={[styles.coverTitle, { color: colors.text }]}>Surf trip</Text>
+        <Text style={[styles.coverCaption, { color: colors.textSecondary }]}>
+          Saturday · Rockaway Beach
+        </Text>
       </Animated.View>
     </View>
   );
@@ -60,10 +64,10 @@ export function AnimatedDemo() {
           dismissible={false}
           dimmed={false}>
           <View style={styles.content}>
-            <Text variant="title">Strawberry picking</Text>
+            <Text variant="title">Surf trip</Text>
             <Text color="textSecondary">
-              Two baskets, a lot of sun and the sweetest berries of the year. Leo made jam the
-              same evening.
+              Two boards, a lot of sun and the best waves of the summer. Leo stuck a new sticker on
+              his board for every wave he caught.
             </Text>
             <View style={styles.people}>
               {people.slice(0, 3).map((person) => (
@@ -85,16 +89,8 @@ const styles = StyleSheet.create({
   cover: { ...StyleSheet.absoluteFill },
   photo: { width: '100%', height: '100%' },
   titleWrap: { position: 'absolute', left: spacing.xl, right: spacing.xl },
-  coverTitle: {
-    color: '#4A0F24',
-    fontSize: 34,
-    lineHeight: 40,
-    fontWeight: '800',
-    letterSpacing: -0.8,
-    textShadowColor: 'rgba(255,255,255,0.8)',
-    textShadowRadius: 10,
-  },
-  coverCaption: { color: '#8A2E4E', fontSize: 16, fontWeight: '600' },
+  coverTitle: { fontSize: 34, lineHeight: 40, fontWeight: '800', letterSpacing: -0.8 },
+  coverCaption: { fontSize: 16, fontWeight: '600' },
   content: { padding: spacing['2xl'], paddingTop: spacing['3xl'], gap: spacing.lg },
   people: { gap: spacing.md },
   person: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },

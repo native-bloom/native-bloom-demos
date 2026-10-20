@@ -14,24 +14,24 @@
  * changes; `scrollToOffset` with a large offset is the documented workaround.
  */
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
-import { Image } from 'expo-image';
 import { useRef, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { people, photos } from '@/demos/_shared/fixtures';
+import { people, stickerArt } from '@/demos/_shared/fixtures';
+import { Picture } from '@/demos/_shared/picture';
 import { DemoStage } from '@/demos/_shared/stage';
 import { Avatar, Button, Card, Text, radius, spacing, useColors } from '@/design-system';
 
 type Comment = { id: string; name: string; text: string; ago: string };
 
 const SAMPLE = [
-  'This place is so good',
+  'Need to see this wall',
   'Saving this for Saturday',
-  'The hojicha latte is my favourite',
+  'The LGTM one is mine',
   'Take me next time',
-  'Best matcha in New York, no question',
-  'That foam art though',
+  'I left a rubber duck there last week',
+  'That ⌘K key sticker though',
   'We were there yesterday!',
   'Adding it to our café list',
 ];
@@ -80,7 +80,10 @@ export function CommentsDemo() {
         returnKeyType="send"
         style={[styles.input, { color: colors.text, backgroundColor: colors.surfaceMuted }]}
       />
-      <Pressable onPress={send} hitSlop={8} style={[styles.send, { backgroundColor: colors.inverse }]}>
+      <Pressable
+        onPress={send}
+        hitSlop={8}
+        style={[styles.send, { backgroundColor: colors.inverse }]}>
         <Text style={{ color: colors.onInverse, fontSize: 18 }}>↑</Text>
       </Pressable>
     </View>
@@ -89,9 +92,9 @@ export function CommentsDemo() {
   return (
     <DemoStage align="top">
       <Card padding={0} style={styles.post}>
-        <Image source={photos.coffee} style={styles.photo} contentFit="cover" />
+        <Picture art={stickerArt.cardDev} style={styles.photo} />
         <View style={styles.postBody}>
-          <Text variant="heading">Best matcha place in New York</Text>
+          <Text variant="heading">The sticker wall at Plentea</Text>
           <Text variant="caption" color="textSecondary">
             Sam Lee · Plentea Matcha · 3 days ago
           </Text>
@@ -147,7 +150,7 @@ export function CommentsDemo() {
 
 const styles = StyleSheet.create({
   post: { overflow: 'hidden' },
-  photo: { width: '100%', height: 260 },
+  photo: { height: 260, borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg },
   postBody: { padding: spacing.lg, gap: spacing.xs },
   commentsButton: { alignSelf: 'flex-start', marginTop: spacing.sm },
   header: {
@@ -159,7 +162,12 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.md,
   },
   // Leaves room for the floating reply bar.
-  list: { paddingHorizontal: spacing.xl, paddingTop: spacing.md, paddingBottom: 96, gap: spacing.lg },
+  list: {
+    paddingHorizontal: spacing.xl,
+    paddingTop: spacing.md,
+    paddingBottom: 96,
+    gap: spacing.lg,
+  },
   comment: { flexDirection: 'row', gap: spacing.md },
   flex: { flex: 1, gap: 2 },
   footer: {
@@ -169,6 +177,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.sm,
   },
-  input: { flex: 1, height: 44, borderRadius: radius.pill, paddingHorizontal: spacing.lg, fontSize: 16 },
+  input: {
+    flex: 1,
+    height: 44,
+    borderRadius: radius.pill,
+    paddingHorizontal: spacing.lg,
+    fontSize: 16,
+  },
   send: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
 });

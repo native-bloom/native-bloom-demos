@@ -11,7 +11,6 @@
  * `androidRenderingMode="software"` because the mask animates.
  */
 import MaskedView from '@react-native-masked-view/masked-view';
-import { Image } from 'expo-image';
 import { useCallback, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, {
@@ -24,7 +23,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
 
-import { memories, photos } from '@/demos/_shared/fixtures';
+import { memories, stickerArt } from '@/demos/_shared/fixtures';
+import { Picture } from '@/demos/_shared/picture';
 import { DemoStage, Trigger } from '@/demos/_shared/stage';
 import { Card, IconTile, ListRow, Text, radius, spacing, useColors } from '@/design-system';
 
@@ -42,9 +42,9 @@ function Feed({ onReplay }: { onReplay: () => void }) {
       <DemoStage align="top">
         <Text variant="display">Bond</Text>
         <Card padding={0} style={styles.hero}>
-          <Image source={photos.strawberries} style={styles.heroImage} contentFit="cover" />
+          <Picture art={stickerArt.cardSurf} style={styles.heroImage} />
           <View style={styles.heroText}>
-            <Text variant="heading">Strawberry picking</Text>
+            <Text variant="heading">Surf trip stickers</Text>
             <Text variant="caption" color="textSecondary">
               Sam Lee · Saturday
             </Text>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   maskCenter: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   cover: { backgroundColor: '#FFFFFF' },
   hero: { overflow: 'hidden' },
-  heroImage: { width: '100%', height: 200 },
+  heroImage: { height: 200, borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg },
   heroText: { padding: spacing.lg, gap: 2 },
   replay: { alignItems: 'center', marginTop: spacing.sm, borderRadius: radius.pill },
 });

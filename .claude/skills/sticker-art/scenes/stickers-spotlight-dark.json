@@ -1,0 +1,16 @@
+{
+  "out": "assets/demos/stickers-spotlight-dark.jpg",
+  "size": [
+    1110,
+    1080
+  ],
+  "surface": "dark",
+  "seed": 41,
+  "count": 10,
+  "scale": [
+    0.9,
+    1.15
+  ],
+  "rotate": 14,
+  "inside": true
+}

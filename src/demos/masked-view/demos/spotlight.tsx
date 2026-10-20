@@ -10,7 +10,6 @@
  * animates; the default hardware mode only renders the mask once.
  */
 import MaskedView from '@react-native-masked-view/masked-view';
-import { Image } from 'expo-image';
 import { StyleSheet, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
@@ -20,8 +19,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { photos } from '@/demos/_shared/fixtures';
+import { stickerArt } from '@/demos/_shared/fixtures';
+import { Picture } from '@/demos/_shared/picture';
 import { DemoStage, Showcase } from '@/demos/_shared/stage';
+import { radius } from '@/design-system';
 
 const HEIGHT = 360;
 // Big enough to cover the card from any corner.
@@ -57,7 +58,7 @@ export function SpotlightDemo() {
             {/* What you see where the mask hasn't reached yet. */}
             <View style={styles.cover}>
               <Text style={styles.coverEmoji}>🎁</Text>
-              <Text style={styles.coverText}>Tap anywhere to open your gift</Text>
+              <Text style={styles.coverText}>Tap anywhere to open your sticker pack</Text>
             </View>
             <MaskedView
               style={StyleSheet.absoluteFill}
@@ -67,7 +68,8 @@ export function SpotlightDemo() {
                   <Animated.View style={[styles.circle, circle]} />
                 </View>
               }>
-              <Image source={photos.strawberries} style={styles.fill} contentFit="cover" />
+              {/* Light in both themes, so the reveal stands out from the dark cover. */}
+              <Picture art={stickerArt.spotlight} surface="light" style={styles.revealed} />
             </MaskedView>
           </View>
         </GestureDetector>
@@ -78,6 +80,7 @@ export function SpotlightDemo() {
 
 const styles = StyleSheet.create({
   card: { height: HEIGHT },
+  revealed: { flex: 1, borderRadius: radius.lg },
   fill: { flex: 1 },
   cover: {
     ...StyleSheet.absoluteFill,

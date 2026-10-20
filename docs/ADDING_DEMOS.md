@@ -269,3 +269,29 @@ Checklist per demo:
   Native's `filter` style only supports brightness and opacity on iOS, and `ImageStyle` doesn't type it.
   Give `StepMarker` views `pointerEvents="none"` so they don't sit on top of the slider's touches.
   `tapToSeek` didn't move the thumb on iOS 26 simulator taps (dragging works).
+- **react-native-fast-confetti (2.0.2):** pure JS on Skia + Reanimated, no rebuild needed. The
+  GitHub README documents `Flake shape` (heart, star, flower, streamer) and `ConfettiPresets`, but
+  they are only on `main`, not in the npm release; draw other silhouettes with `svg` / `image`
+  textures. Textured flakes ignore `colors`, so make one flake per tint. Changing `count` on a
+  mounted component throws "transforms and sprites arrays must have the same length" from Skia
+  (seen through Fast Refresh): change its `key` along with the count. A looping
+  `<Confetti infinite />` leaves the area empty between rounds; use `<ContinuousConfetti />` for
+  anything that should keep falling. The canvas sits at `zIndex: 1`; render it first with
+  `containerStyle={{ zIndex: 0 }}` to keep content on top. `restart({ origins })` positions are in
+  the container's points (subtract its `measureInWindow` offset from touch `pageX` / `pageY`).
+  `simctl recordVideo` can't write to this external volume; record into a temp folder.
+- **@gorhom/bottom-sheet (5.2.14):** pure JS, works with Reanimated 4.5. `BottomSheetModalProvider` is
+  the library's `RootProvider`, so modals and backdrops cover the header. Sheets default to
+  `accessible={true}`, which makes the whole sheet one accessibility element: VoiceOver and Argent
+  can't see the buttons inside, so every demo passes `accessible={false}`. `BottomSheetView`
+  merges array styles with `StyleSheet.compose`, which keeps only two items: a third (often the
+  safe-area padding) is dropped and dynamic sizing measures short, so pass at most two. The
+  default `stackBehavior="switch"` unmounts the modal underneath instead of restoring it
+  (`onChange(-1)` marks it minimized before `onClose` runs); use `push`. `bottomInset` on
+  `BottomSheetFooter` leaves a see-through strip under the footer; pad the footer's own
+  background instead, and fade that padding with keyboard-controller's
+  `useReanimatedKeyboardAnimation().progress` when the footer holds a `BottomSheetTextInput`.
+  Give keyboard sheets `topInset={insets.top}` or the raised sheet slides under the status bar.
+  Typing with Argent's `keyboard` tool hides the software keyboard, the input blurs and the keys
+  reach React Native's dev shortcuts (`r` reloads); tap the field and use `paste` instead.
+  In react-native-maps on iOS, `animateCamera` zooms with `altitude` (`zoom` is Google only).

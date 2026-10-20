@@ -42,7 +42,10 @@ export function Avatar({ name, uri, size = 40, status }: AvatarProps) {
               backgroundColor: colors.surfaceMuted,
             },
           ]}>
-          <Text variant="label" color="textSecondary" style={{ fontSize: size * 0.36 }}>
+          <Text
+            variant="label"
+            color="textSecondary"
+            style={{ fontSize: size * 0.36, lineHeight: Math.max(18, size * 0.44) }}>
             {initials(name)}
           </Text>
         </View>

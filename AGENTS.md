@@ -9,6 +9,7 @@ coding agents copy when a user installs that block.
 - [DESIGN.md](DESIGN.md) — how demos look: Bond visual language, stages, copy, theming, recording.
 - [docs/ADDING_DEMOS.md](docs/ADDING_DEMOS.md) — structure: registry, folders, providers, file rules, verification, gotchas.
 - `.claude/skills/add-library-demos` — the workflow when the user hands you a library's GitHub / docs links.
+- `.claude/skills/sticker-art` — draws every picture a demo needs (stickers on the app canvas).
 
 ## Layout
 
@@ -26,8 +27,9 @@ src/
     types.ts                    # LibraryDefinition / DemoDefinition
     registry.ts                 # list of libraries
     _shared/stage.tsx           # DemoStage, TriggerStack, Trigger, Showcase, VariantBar, StageHint
+    _shared/picture.tsx         # Picture: sticker art in a card slot, with an inner-shadow edge
     _shared/flow.tsx            # DemoFlow wrapper for flow layouts
-    _shared/fixtures.ts         # shared people, memories, places, photos
+    _shared/fixtures.ts         # shared people, memories, places, sticker art
     <library>/index.ts          # library metadata + demo list
     <library>/demos/<slug>.tsx  # component demo
     <library>/demos/<slug>/     # flow demo (layout.tsx + screens)

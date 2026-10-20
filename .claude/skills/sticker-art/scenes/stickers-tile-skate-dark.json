@@ -1,0 +1,27 @@
+{
+  "out": "assets/demos/stickers-tile-skate-dark.jpg",
+  "size": [
+    900,
+    900
+  ],
+  "surface": "dark",
+  "seed": 53,
+  "place": [
+    {
+      "id": "checker",
+      "x": 0.42,
+      "y": 0.42,
+      "scale": 2.5,
+      "rotate": 8
+    },
+    {
+      "id": "skateboard",
+      "x": 0.8,
+      "y": 0.66,
+      "scale": 1.35,
+      "rotate": -18
+    }
+  ],
+  "stickers": [],
+  "rotate": 14
+}

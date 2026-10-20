@@ -1,0 +1,23 @@
+{
+  "out": "assets/demos/stickers-cover-dark.jpg",
+  "size": [
+    1206,
+    2622
+  ],
+  "surface": "dark",
+  "seed": 21,
+  "count": 16,
+  "scale": [
+    1.0,
+    1.3
+  ],
+  "keepClear": [
+    [
+      0.04,
+      0.03,
+      0.92,
+      0.17
+    ]
+  ],
+  "rotate": 14
+}

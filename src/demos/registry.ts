@@ -1,5 +1,7 @@
 import type { LibraryDefinition, ProviderComponent } from './types';
+import { bottomSheet } from './bottom-sheet';
 import { datetimepicker } from './datetimepicker';
+import { fastConfetti } from './fast-confetti';
 import { maskedView } from './masked-view';
 import { picker } from './picker';
 import { reactNativeGraph } from './react-native-graph';
@@ -27,6 +29,8 @@ export const libraries: readonly LibraryDefinition[] = [
   reactNativeMaps,
   picker,
   slider,
+  fastConfetti,
+  bottomSheet,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));

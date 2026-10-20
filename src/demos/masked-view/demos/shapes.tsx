@@ -3,7 +3,7 @@
  *
  * The mask can be any view, not just text: a View with a border radius, an
  * SVG path from react-native-svg, or even an emoji, whose opaque pixels
- * become the shape. Anything you can draw with alpha can crop a photo.
+ * become the shape. Anything you can draw with alpha can crop a picture.
  */
 import MaskedView from '@react-native-masked-view/masked-view';
 import { Image } from 'expo-image';
@@ -11,7 +11,7 @@ import { useState, type ReactElement } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-import { photos } from '@/demos/_shared/fixtures';
+import { stickerArt } from '@/demos/_shared/fixtures';
 import { DemoStage, Showcase, VariantBar } from '@/demos/_shared/stage';
 
 const SHAPES = [
@@ -53,7 +53,8 @@ export function ShapesDemo() {
         below={<VariantBar value={shape} options={SHAPES} onChange={setShape} />}>
         <View style={styles.center}>
           <MaskedView style={styles.masked} maskElement={MASKS[shape]}>
-            <Image source={photos.strawberries} style={styles.photo} contentFit="cover" />
+            {/* The light fill in both themes: it reads best against the dark backdrop. */}
+            <Image source={stickerArt.fillMix.light} style={styles.photo} contentFit="cover" />
           </MaskedView>
         </View>
       </Showcase>

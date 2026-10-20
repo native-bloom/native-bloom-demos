@@ -7,15 +7,20 @@
  * `TrueSheet.dismissAll()` closes the whole stack in one animation.
  */
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
-import { Image } from 'expo-image';
 import { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { photos } from '@/demos/_shared/fixtures';
+import { stickerArt } from '@/demos/_shared/fixtures';
+import { Picture } from '@/demos/_shared/picture';
 import { DemoStage, Trigger, TriggerStack } from '@/demos/_shared/stage';
 import { Button, IconTile, Text, radius, spacing } from '@/design-system';
 
-const PHOTOS = [photos.strawberries, photos.coffee, photos.salad, photos.vegetables];
+const PHOTOS = [
+  stickerArt.tileCode,
+  stickerArt.tileSurf,
+  stickerArt.tileSkate,
+  stickerArt.tileDuck,
+];
 
 export function StackingDemo() {
   const album = useRef<TrueSheet>(null);
@@ -25,7 +30,12 @@ export function StackingDemo() {
   return (
     <DemoStage>
       <TriggerStack>
-        <Trigger tone="primary" emoji="🧁" label="Festive treats album" onPress={() => album.current?.present()} />
+        <Trigger
+          tone="primary"
+          emoji="🧁"
+          label="Festive treats album"
+          onPress={() => album.current?.present()}
+        />
       </TriggerStack>
 
       <TrueSheet ref={album} detents={['auto']}>
@@ -39,7 +49,12 @@ export function StackingDemo() {
               </Text>
             </View>
           </View>
-          <Button label="Add photos" emoji="🖼️" fullWidth onPress={() => picker.current?.present()} />
+          <Button
+            label="Add photos"
+            emoji="🖼️"
+            fullWidth
+            onPress={() => picker.current?.present()}
+          />
         </View>
       </TrueSheet>
 
@@ -47,8 +62,8 @@ export function StackingDemo() {
         <View style={styles.content}>
           <Text variant="heading">Choose photos</Text>
           <View style={styles.grid}>
-            {PHOTOS.map((source, i) => (
-              <Image key={i} source={source} style={styles.photo} contentFit="cover" />
+            {PHOTOS.map((art, i) => (
+              <Picture key={i} art={art} style={styles.photo} />
             ))}
           </View>
           <Button label="Next" fullWidth onPress={() => caption.current?.present()} />

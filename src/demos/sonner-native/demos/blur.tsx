@@ -2,17 +2,17 @@
  * Sonner Native · Glass toasts
  *
  * `backgroundComponent` renders behind a toast's content and animates with it.
- * An `expo-blur` BlurView turns the toast into frosted glass over the photo.
+ * An `expo-blur` BlurView turns the toast into frosted glass over the picture.
  *
  * Extra package: expo-blur. On Android, BlurView needs
  * `experimentalBlurMethod="dimezisBlurView"` to really blur.
  */
 import { BlurView } from 'expo-blur';
-import { Image } from 'expo-image';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { Toaster, toast } from 'sonner-native';
 
-import { photos } from '@/demos/_shared/fixtures';
+import { stickerArt } from '@/demos/_shared/fixtures';
+import { Picture } from '@/demos/_shared/picture';
 import { DemoStage, Trigger } from '@/demos/_shared/stage';
 import { radius, spacing } from '@/design-system';
 
@@ -20,8 +20,8 @@ const blurMethod = Platform.OS === 'android' ? 'dimezisBlurView' : undefined;
 
 function showLightGlass() {
   toast('Saved to Memories', {
-    description: 'Strawberry season · 12 photos',
-    icon: <Text style={{ fontSize: 18 }}>🍓</Text>,
+    description: 'Sticker swap · 12 photos',
+    icon: <Text style={{ fontSize: 18 }}>🛹</Text>,
     backgroundComponent: (
       <BlurView
         intensity={70}
@@ -39,7 +39,7 @@ function showLightGlass() {
 
 function showDarkGlass() {
   toast('Sam Lee loved your story', {
-    description: 'Strawberry season',
+    description: 'Sticker swap',
     icon: <Text style={{ fontSize: 18 }}>❤️</Text>,
     backgroundComponent: (
       <BlurView
@@ -59,13 +59,12 @@ function showDarkGlass() {
 export function BlurDemo() {
   return (
     <DemoStage bleed align="top">
-      <View style={styles.photoWrap}>
-        <Image source={photos.strawberries} style={styles.photo} contentFit="cover" />
+      <Picture art={stickerArt.glass} style={styles.photoWrap}>
         <View style={styles.actions}>
           <Trigger emoji="🤍" label="Light glass" onPress={showLightGlass} />
           <Trigger emoji="🖤" label="Dark glass" onPress={showDarkGlass} />
         </View>
-      </View>
+      </Picture>
 
       <Toaster position="center" />
     </DemoStage>
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
     borderCurve: 'continuous',
     overflow: 'hidden',
   },
-  photo: StyleSheet.absoluteFill,
   actions: {
     position: 'absolute',
     left: 0,

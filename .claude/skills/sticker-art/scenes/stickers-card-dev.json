@@ -1,0 +1,28 @@
+{
+  "out": "assets/demos/stickers-card-dev.jpg",
+  "size": [
+    1200,
+    760
+  ],
+  "surface": "canvas",
+  "seed": 3,
+  "stickers": [
+    "code",
+    "braces",
+    "lgtm",
+    "git-branch",
+    "cmd-k",
+    "bug"
+  ],
+  "scale": [
+    0.82,
+    1.0
+  ],
+  "rotate": 14,
+  "inside": [
+    0.11,
+    0.075,
+    0.78,
+    0.85
+  ]
+}

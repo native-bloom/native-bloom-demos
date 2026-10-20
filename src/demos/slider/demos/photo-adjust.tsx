@@ -2,7 +2,7 @@
  * Slider · Photo adjustments
  *
  * Three sliders edit a picture live, like a photo editor's Adjust panel.
- * Each value sets the opacity of a color layer over the photo: white or black
+ * Each value sets the opacity of a color layer over the picture: white or black
  * for light, amber for warmth, grey for fade. (React Native's `filter` style
  * only supports brightness and opacity on iOS, so overlays keep it the same on
  * both platforms; a Skia or GL image filter is the next step up.) Light is
@@ -11,9 +11,10 @@
  */
 import Slider from '@react-native-community/slider';
 import { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { photos } from '@/demos/_shared/fixtures';
+import { stickerArt } from '@/demos/_shared/fixtures';
+import { Picture } from '@/demos/_shared/picture';
 import { DemoStage } from '@/demos/_shared/stage';
 import { Button, Card, Text, radius, spacing } from '@/design-system';
 
@@ -31,8 +32,7 @@ export function PhotoAdjustDemo() {
 
   return (
     <DemoStage align="top">
-      <View style={styles.photoWrap}>
-        <Image source={photos.strawberries} style={styles.photo} resizeMode="cover" />
+      <Picture art={stickerArt.cardSurf} style={styles.photo}>
         <View
           pointerEvents="none"
           style={[
@@ -51,7 +51,7 @@ export function PhotoAdjustDemo() {
           pointerEvents="none"
           style={[styles.layer, { backgroundColor: '#C9C4BE', opacity: adjust.fade * 0.6 }]}
         />
-      </View>
+      </Picture>
       <Card padding="md">
         {CONTROLS.map((c) => (
           <View key={c.key} style={styles.row}>
@@ -78,8 +78,7 @@ export function PhotoAdjustDemo() {
 }
 
 const styles = StyleSheet.create({
-  photoWrap: { borderRadius: radius.lg, borderCurve: 'continuous', overflow: 'hidden' },
-  photo: { width: '100%', height: 300 },
+  photo: { height: 300, borderRadius: radius.lg },
   layer: { ...StyleSheet.absoluteFill },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   label: { width: 96, fontSize: 15, fontWeight: '600' },

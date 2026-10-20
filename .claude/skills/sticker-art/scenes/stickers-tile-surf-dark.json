@@ -1,0 +1,27 @@
+{
+  "out": "assets/demos/stickers-tile-surf-dark.jpg",
+  "size": [
+    900,
+    900
+  ],
+  "surface": "dark",
+  "seed": 52,
+  "place": [
+    {
+      "id": "wave",
+      "x": 0.44,
+      "y": 0.47,
+      "scale": 2.6,
+      "rotate": -6
+    },
+    {
+      "id": "surfboard",
+      "x": 0.85,
+      "y": 0.62,
+      "scale": 1.3,
+      "rotate": 14
+    }
+  ],
+  "stickers": [],
+  "rotate": 14
+}

@@ -51,7 +51,7 @@ For components that are the demo themselves: inputs, calendars, pickers, charts,
 The component inside a tiny product screen that shows why you would use it: undo a delete,
 search with a loading state, share from a sheet.
 
-- One screen, one job. A list of 3–5 items, a card, or a photo, plus the component.
+- One screen, one job. A list of 3–5 items, a card, or a picture, plus the component.
 - Build the scene from design-system pieces (`Card`, `ListRow`, `IconTile`, `Avatar`) and fixtures.
 - Put library output where it does not cover the scene (bottom toasts over a list, for example).
 
@@ -80,8 +80,13 @@ header would visibly get in the way.
 ## Copy and sample data
 
 - The world is a Bond-like app: people (Sam Lee, Alex Smith, Samsam, Leo Lee, Ryan Lee),
-  memories (cooking, cafés, festive treats), places (Plentea Matcha, Kettl), stories and photos.
+  memories (cooking, cafés, festive treats), places (Plentea Matcha, Kettl) and stories.
   Use `@/demos/_shared/fixtures` for anything list-shaped.
+- Pictures are sticker art, never photos or emoji scenes: original dev and skate/surf stickers on
+  the app's canvas, from `stickerArt` in the fixtures (light and dark, pick by `useTheme().scheme`).
+  Show them in cards with `Picture` (`@/demos/_shared/picture`), which frames them with a soft
+  inner shadow so they don't melt into the canvas.
+  Need a new one? Draw it with the `sticker-art` skill (`.claude/skills/sticker-art`).
 - Short and human: "Sam Lee loved your story", "Storage almost full", "Memory restored".
 - No lorem ipsum, "Item 1", "Test", or developer words (props, callback, payload) on screen.
 - Sentence case everywhere. No trailing periods in titles or labels.

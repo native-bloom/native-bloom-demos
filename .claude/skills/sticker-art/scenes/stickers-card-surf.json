@@ -1,0 +1,28 @@
+{
+  "out": "assets/demos/stickers-card-surf.jpg",
+  "size": [
+    1200,
+    760
+  ],
+  "surface": "canvas",
+  "seed": 8,
+  "stickers": [
+    "wave",
+    "palm-sun",
+    "surfboard",
+    "surfs-up",
+    "smiley",
+    "duck"
+  ],
+  "scale": [
+    0.82,
+    1.0
+  ],
+  "rotate": 14,
+  "inside": [
+    0.11,
+    0.075,
+    0.78,
+    0.85
+  ]
+}
