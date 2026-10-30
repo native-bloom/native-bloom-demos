@@ -4,6 +4,7 @@ import { datetimepicker } from './datetimepicker';
 import { fastConfetti } from './fast-confetti';
 import { maskedView } from './masked-view';
 import { picker } from './picker';
+import { pressto } from './pressto';
 import { reactNativeGraph } from './react-native-graph';
 import { reactNativeMaps } from './react-native-maps';
 import { reanimatedColorPicker } from './reanimated-color-picker';
@@ -31,6 +32,7 @@ export const libraries: readonly LibraryDefinition[] = [
   slider,
   fastConfetti,
   bottomSheet,
+  pressto,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));

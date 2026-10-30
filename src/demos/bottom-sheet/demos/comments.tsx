@@ -14,6 +14,10 @@
  * keyboard-controller's `useReanimatedKeyboardAnimation().progress` fades that
  * padding out as the keyboard opens, so the reply box sits flush on it.
  *
+ * Keep `footerComponent` stable: the footer is a module-level component that
+ * holds its own draft, and the render function is memoized. A footer function
+ * rebuilt on every keystroke remounts the input and drops the keyboard.
+ *
  * `accessible={false}` on the sheet: by default it is a single accessibility
  * element, which hides the buttons inside it from VoiceOver.
  */
@@ -27,7 +31,7 @@ import {
   type BottomSheetFlatListMethods,
   type BottomSheetFooterProps,
 } from '@gorhom/bottom-sheet';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
@@ -74,12 +78,11 @@ function Backdrop(props: BottomSheetBackdropProps) {
   return <BottomSheetBackdrop {...props} appearsOnIndex={0} disappearsOnIndex={-1} />;
 }
 
-export function CommentsDemo() {
+type ReplyFooterProps = BottomSheetFooterProps & { onSend: (text: string) => void };
+
+function ReplyFooter({ onSend, ...props }: ReplyFooterProps) {
   const colors = useColors();
   const insets = useSafeAreaInsets();
-  const sheet = useRef<BottomSheetModal>(null);
-  const list = useRef<BottomSheetFlatListMethods>(null);
-  const [comments, setComments] = useState(INITIAL);
   const [draft, setDraft] = useState('');
   const keyboard = useReanimatedKeyboardAnimation();
   const footerPadding = useAnimatedStyle(() => ({
@@ -89,12 +92,11 @@ export function CommentsDemo() {
   function send() {
     const text = draft.trim();
     if (!text) return;
-    setComments((prev) => [...prev, { id: String(Date.now()), name: 'You', text, ago: 'now' }]);
+    onSend(text);
     setDraft('');
-    setTimeout(() => list.current?.scrollToEnd({ animated: true }), 50);
   }
 
-  const renderFooter = (props: BottomSheetFooterProps) => (
+  return (
     <BottomSheetFooter {...props}>
       <Animated.View
         style={[
@@ -123,6 +125,24 @@ export function CommentsDemo() {
         </Pressable>
       </Animated.View>
     </BottomSheetFooter>
+  );
+}
+
+export function CommentsDemo() {
+  const colors = useColors();
+  const insets = useSafeAreaInsets();
+  const sheet = useRef<BottomSheetModal>(null);
+  const list = useRef<BottomSheetFlatListMethods>(null);
+  const [comments, setComments] = useState(INITIAL);
+
+  const send = useCallback((text: string) => {
+    setComments((prev) => [...prev, { id: String(Date.now()), name: 'You', text, ago: 'now' }]);
+    setTimeout(() => list.current?.scrollToEnd({ animated: true }), 50);
+  }, []);
+
+  const renderFooter = useCallback(
+    (props: BottomSheetFooterProps) => <ReplyFooter {...props} onSend={send} />,
+    [send],
   );
 
   return (

@@ -295,3 +295,19 @@ Checklist per demo:
   Typing with Argent's `keyboard` tool hides the software keyboard, the input blurs and the keys
   reach React Native's dev shortcuts (`r` reloads); tap the field and use `paste` instead.
   In react-native-maps on iOS, `animateCamera` zooms with `altitude` (`zoom` is Google only).
+- **pressto (0.7.0):** pure JS on Gesture Handler's `BaseButton` + Reanimated, no rebuild needed. The
+  README on `main` documents a per-pressable `config` prop (`config={{ minScale }}`), but the npm
+  release doesn't have it: set `minScale` / `activeOpacity` / `baseScale` on a `PressablesConfig`
+  around the pressables instead. `isSelected` means "last pressed in the group"; without a
+  `PressablesConfig` (or `PressablesGroup`) around them, every pressto pressable in the app shares one
+  group. Selection can't start on an item (there is no initial selected). `withAnimation` returns an
+  animation object: return it directly as a style value, never pass it into `interpolateColor`.
+  Function `children` run inside the pressable's render; put hooks (`useAnimatedStyle`) in a child
+  component and pass the shared values down. Long presses use `onLongPress` with Gesture Handler's
+  600 ms default delay (`delayLongPress` isn't in pressto's prop types). With Reanimated 4.5 the
+  `isToggled` in `onPress` options is the value from before the press (the worklet's `isToggled` is
+  right): keep a React toggle (`setOn((on) => !on)`) for labels and other state.
+  **iOS 26 native stack:** the full-width back swipe holds back touch-down for Gesture Handler
+  buttons (pressto, `BaseButton`, `RectButton`) until the finger moves or lifts, so a held press only
+  animates on release and `onLongPress` never fires (React Native's `Pressable` is unaffected). The
+  library `Provider` sets `fullScreenGestureEnabled: false` on the demo screen and restores it on exit.
