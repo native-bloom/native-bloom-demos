@@ -1,6 +1,7 @@
 import type { LibraryDefinition, ProviderComponent } from './types';
 import { bottomSheet } from './bottom-sheet';
 import { datetimepicker } from './datetimepicker';
+import { enrichedMarkdown } from './enriched-markdown';
 import { fastConfetti } from './fast-confetti';
 import { maskedView } from './masked-view';
 import { picker } from './picker';
@@ -33,6 +34,7 @@ export const libraries: readonly LibraryDefinition[] = [
   fastConfetti,
   bottomSheet,
   pressto,
+  enrichedMarkdown,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));

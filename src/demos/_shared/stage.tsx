@@ -10,7 +10,7 @@
  * - `VariantBar`   — centred chip row that switches a showcase between variants.
  * - `StageHint`    — one short grey line, for the rare demo that needs it.
  */
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import { ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import {
   KeyboardAvoidingView,
@@ -55,6 +55,7 @@ export function DemoStage({
   const insets = useSafeAreaInsets();
   const chrome = useContext(DemoChromeContext);
   const topInset = chrome === 'none' ? insets.top : 0;
+  const [footerHeight, setFooterHeight] = useState(0);
 
   const bodyStyle = [
     styles.body,
@@ -89,7 +90,11 @@ export function DemoStage({
   );
 
   const footerView = footer ? (
-    <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}>{footer}</View>
+    <View
+      onLayout={(e) => setFooterHeight(e.nativeEvent.layout.height)}
+      style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}>
+      {footer}
+    </View>
   ) : null;
 
   if (!avoidKeyboard) {
@@ -106,7 +111,13 @@ export function DemoStage({
       {scroll ? (
         body
       ) : (
-        <KeyboardAvoidingView behavior="padding" style={styles.fill}>
+        // With a footer, the body must end where the raised footer starts: measure the
+        // body's real screen position and also leave room for the footer above the keyboard.
+        <KeyboardAvoidingView
+          behavior="padding"
+          automaticOffset={!!footer}
+          keyboardVerticalOffset={footer ? footerHeight - insets.bottom : 0}
+          style={styles.fill}>
           {body}
         </KeyboardAvoidingView>
       )}

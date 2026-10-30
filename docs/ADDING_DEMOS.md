@@ -311,3 +311,19 @@ Checklist per demo:
   buttons (pressto, `BaseButton`, `RectButton`) until the finger moves or lifts, so a held press only
   animates on release and `onLongPress` never fires (React Native's `Pressable` is unaffected). The
   library `Provider` sets `fullScreenGestureEnabled: false` on the demo screen and restores it on exit.
+- **react-native-enriched-markdown (1.1.1):** native module (New Architecture), needs a dev build. There
+  is no config plugin: optional features are set in an `"enriched-markdown"` block in the app's
+  `package.json` (`enableCodeHighlight`, `enableMath`, `enableVideo`, `codeHighlightLanguages`), read by
+  the postinstall download and by `pod install`; change it, then reinstall and rebuild. npm 11 prints an
+  `allow-scripts` warning for its postinstall, but the assets still download (check `ios/vendor`). The
+  GitHub README documents link pills (`linkPillContent`, `pill` in `linkVariants`) and
+  `linkContextMenuItems`, but they are only on `main`, not in the npm release. The library has only
+  light colors: pass a dark `markdownStyle` by color scheme (`src/demos/enriched-markdown/styles.ts`).
+  On iOS the CommonMark renderer (default flavor) draws an opaque white box behind the text in dark mode
+  unless you pass `containerStyle={{ backgroundColor: 'transparent' }}`; GitHub flavor is fine.
+  Strikethrough (`~~`), tables, task lists and alerts need `flavor="github"`, and so does block math
+  (`$$`). LaTeX is on by default, so `$` pairs in copy (prices) become formulas. Code block lines longer
+  than about 38 characters scroll sideways inside a card. `EnrichedMarkdownTextInput` doesn't emit
+  `onChangeState` on mount (the toolbar lights up after the first cursor move), and `setValue('')`
+  doesn't end an open mention flow (`onEndMention` isn't called), so reset the picker yourself. Pasted
+  text doesn't fire `onChangeMention`; to test filtering with Argent, type with the `keyboard` tool.

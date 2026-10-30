@@ -31,6 +31,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.3",
+    "react-native-enriched-markdown": "^1.1.1",
     "react-native-fast-confetti": "^2.0.2",
     "react-native-gesture-handler": "~2.32.0",
     "react-native-graph": "^1.4.0",
@@ -65,5 +66,16 @@
     "check:demos": "node ./scripts/check-demos.mjs",
     "argent": "node ./scripts/argent.mjs"
   },
-  "private": true
+  "private": true,
+  "enriched-markdown": {
+    "enableCodeHighlight": true,
+    "enableMath": true,
+    "enableVideo": false,
+    "codeHighlightLanguages": [
+      "typescript",
+      "swift",
+      "python",
+      "javascript"
+    ]
+  }
 }
