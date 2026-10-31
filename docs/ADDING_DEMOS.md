@@ -327,3 +327,19 @@ Checklist per demo:
   `onChangeState` on mount (the toolbar lights up after the first cursor move), and `setValue('')`
   doesn't end an open mention flow (`onEndMention` isn't called), so reset the picker yourself. Pasted
   text doesn't fire `onChangeMention`; to test filtering with Argent, type with the `keyboard` tool.
+- **react-native-gifted-charts (1.4.81):** JavaScript on react-native-svg, but its gradient peer is
+  native: install `expo-linear-gradient` and rebuild. Axes, rules and labels default to black/grey and
+  there is no color scheme prop; the demos spread `useAxisTheme()` (`src/demos/gifted-charts/theme.ts`)
+  and pass `frontColor` for default bars, which are black. Pointer charts (`pointerConfig`) lose
+  horizontal drags to the iOS 26 full-width back swipe, so the library `Provider` sets
+  `fullScreenGestureEnabled: false`. Only `LineChart` animates on data change (`animateOnDataChange`);
+  `BarChart` `isAnimated` runs on mount only (change `key` to replay). `PieChart` keeps its focus
+  internally: start it with `focusedPieIndex` (changing it later re-focuses) and read it from
+  `centerLabelComponent(index)`; the `selectedIndex` / `setSelectedIndex` props don't control it.
+  `CandleStickChart` swaps `bullishColor` / `bearishColor` (a candle is "bullish" when it closes
+  lower), and `yAxisOffset` shifts its candles up instead of the axis; color candles per item (`color`,
+  `barBorderColor`). `RadarChart` with `isAnimated` never draws the polygon, and its grid has a white
+  radial gradient unless `gridConfig.showGradient: false`. `stackBorderTopLeftRadius` and per-stack
+  `borderTopLeftRadius` don't round stacked bars. `BubbleChart` pads its axes to fit bubbles, so tick
+  values come out uneven. With `yAxisOffset`, `maxValue` is measured from the offset. Charts take a
+  fixed `width` (the plot area, without the y-axis labels): about 270 fits a showcase card.

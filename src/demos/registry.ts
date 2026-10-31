@@ -3,6 +3,7 @@ import { bottomSheet } from './bottom-sheet';
 import { datetimepicker } from './datetimepicker';
 import { enrichedMarkdown } from './enriched-markdown';
 import { fastConfetti } from './fast-confetti';
+import { giftedCharts } from './gifted-charts';
 import { maskedView } from './masked-view';
 import { picker } from './picker';
 import { pressto } from './pressto';
@@ -35,6 +36,7 @@ export const libraries: readonly LibraryDefinition[] = [
   bottomSheet,
   pressto,
   enrichedMarkdown,
+  giftedCharts,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));
