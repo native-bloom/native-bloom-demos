@@ -343,3 +343,17 @@ Checklist per demo:
   `borderTopLeftRadius` don't round stacked bars. `BubbleChart` pads its axes to fit bubbles, so tick
   values come out uneven. With `yAxisOffset`, `maxValue` is measured from the offset. Charts take a
   fixed `width` (the plot area, without the y-axis labels): about 270 fits a showcase card.
+- **react-native-animated-glow (3.2.0):** pure JS on Skia + Reanimated, no rebuild needed. The glow,
+  the preset's `backgroundColor` and the animated border are drawn by one shader on a canvas *under*
+  the children (100 pt larger on every side), so `inside` / `over` glows and the border only show
+  where the content is transparent: color the view with `backgroundColor`, not the child's style.
+  `inside` and `over` add light on top of that background, so they vanish on white; on light
+  surfaces leave `backgroundColor` unset and put the color on `AnimatedGlow`'s `style` (under the
+  canvas) instead. White and pastel colors in `inside` / `over` layers render as a dark band on iOS
+  (Skia 2.6); use saturated colors. Dark glow colors draw a visible shadow on light screens. With
+  glow layers, a single-color `borderColor` isn't drawn at all; pass two of the same color. Colors
+  are interpolated without alpha, so fade a layer with `opacity: 0`, never `transparent`. Changing
+  the `preset` animates only if its default state has a `transition` (and the layers line up);
+  otherwise change `key` to restart it. `isVisible={false}` unmounts the canvas at once (no fade
+  out) and leaves the view without background. In a comet (`coverage` < 1 with a `glowSize` list),
+  the last size is the head: end the list with 0 or the head is cut off sharply.

@@ -1,4 +1,5 @@
 import type { LibraryDefinition, ProviderComponent } from './types';
+import { animatedGlow } from './animated-glow';
 import { bottomSheet } from './bottom-sheet';
 import { datetimepicker } from './datetimepicker';
 import { enrichedMarkdown } from './enriched-markdown';
@@ -37,6 +38,7 @@ export const libraries: readonly LibraryDefinition[] = [
   pressto,
   enrichedMarkdown,
   giftedCharts,
+  animatedGlow,
 ];
 
 export const categories: readonly string[] = Array.from(new Set(libraries.map((l) => l.category)));
